@@ -1,18 +1,38 @@
-[project]
+[tool.poetry]
 name = "apis-externas-4"
 version = "0.1.0"
-description = ""
-authors = [
-    {name = "deyvidborges-dev",email = "deyvid.borges@hotmail.com"}
-]
+description = "Suíte CLI modular para explorar conjuntos de dados públicos."
 readme = "README.md"
-requires-python = ">=3.14"
-dependencies = [
-]
+license = "MIT"
+packages = [{ include = "apis_externas_4", from = "src" }]
 
-[tool.poetry]
-packages = [{include = "apis_externas_4", from = "src"}]
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+requests = ">=2.32,<3.0"
+pandas = ">=2.2,<4.0"
+plotly = ">=5.24,<7.0"
+folium = ">=0.19,<1.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.3,<10.0"
+ruff = ">=0.9,<1.0"
+
+[tool.poetry.scripts]
+open-data-challenges = "apis_externas_4.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core>=1.9.0"]
 build-backend = "poetry.core.masonry.api"
